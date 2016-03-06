@@ -16,14 +16,12 @@
 //= require turbolinks
 //= require_tree .
 
+//= require jquery.flexisel.js
 //= require bootstrap.js
 //= require imagezoom.js
 //= require memenu.js
-//= require responsiveslides.min.js
 
-
-var ready;
-ready = function() {
+var ready = function() {
 
   $(function () {
     $("#slider").responsiveSlides({
@@ -35,9 +33,12 @@ ready = function() {
     });
   });
 
-  $(document).ready(function(){$(".memenu").memenu();});
+  $(".memenu").memenu();
 
-
+  $('.flexslider').flexslider({
+    animation: "slide",
+    controlNav: "thumbnails"
+  });
 };
 
 $(document).ready(ready);

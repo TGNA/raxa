@@ -1,0 +1,6 @@
+<% flash.each do |type, message| %>
+  <div data-alert class="alert alert-dismissible <%= bootstrap_class_for(type) %> slideInDown" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <%= message.to_s.capitalize %>
+  </div>
+<% end %>

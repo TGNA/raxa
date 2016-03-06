@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  devise_for :admins
+  devise_for :users
   get 'welcome/index'
 
   get '/contact' => "contact#new"
@@ -7,8 +9,9 @@ Rails.application.routes.draw do
 
   get '/about' => "welcome#about"
 
-  get '/products' => "product#index"
-  get '/products/:id' => "product#show"
+  # get '/products' => "products#index"
+  # get '/products/:id' => "products#show"
+  resources :products, only: [:index, :show]
   
   root 'welcome#index'
 

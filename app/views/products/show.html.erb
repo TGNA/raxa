@@ -1,0 +1,49 @@
+<div class="product">
+   <div class="container">        
+     <div class="product-price1">
+       <div class="top-sing">
+          <div class="col-md-7 single-top"> 
+           <div class="flexslider">
+                <ul class="slides">
+                <li data-thumb="http://localhost:3000/images/si.jpg">
+                  <div class="thumb-image"> <img src="http://localhost:3000/images/si.jpg" data-imagezoom="true" class="img-responsive" alt=""/> </div>
+                </li>
+                <li data-thumb="http://localhost:3000/images/si2.jpg">
+                   <div class="thumb-image"> <img src="http://localhost:3000/images/si2.jpg" data-imagezoom="true" class="img-responsive" alt=""/> </div>
+                </li>
+                <li data-thumb="http://localhost:3000/images/si3.jpg">
+                   <div class="thumb-image"> <img src="http://localhost:3000/images/si3.jpg" data-imagezoom="true" class="img-responsive" alt=""/> </div>
+                </li> 
+                </ul>
+            </div>
+         </div> 
+           <div class="col-md-5 single-top-in simpleCart_shelfItem">
+            <div class="single-para ">
+             <h4><%= @product.name %></h4>              
+              <% if user_signed_in? %>
+                <h5 class="item_price"><%= number_to_currency @product.price%></h5>  
+              <% end %>            
+              <p class="para">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, Vivamus porttitor tincidunt elementum nisi a, euismod rhoncus urna. Curabitur scelerisque vulputate diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat </p>
+              <div class="prdt-info-grid">
+                 <ul>
+                   <li>- Brand : Fos Lighting</li>
+                   <li>- Dimensions : (LXBXH) in cms of...</li>
+                   <li>- Color : Brown</li>
+                   <li>- Material : Wood</li>
+                 </ul>
+              </div>
+              <% if user_signed_in? %>
+                <%= form_for @order_item, remote: true do |f| %>
+                  <%= f.number_field :quantity, value: 1, class: "item_quantity", min: 1 %>
+                  <%= f.hidden_field :product_id, value: @product.id %>
+                  <%= f.submit "ADD", class: "item_add items" %>
+                <% end %>
+              <% end %>          
+           </div>
+         </div>
+         <div class="clearfix"> </div>
+       </div>
+     </div>
+   </div>
+</div>
+<script type="text/javascript" src="<%=root_url%>/assets/jquery.flexslider.js"></script>
