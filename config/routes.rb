@@ -16,5 +16,10 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   resource :cart, only: [:show]
+  post '/cart/checkout' => "carts#checkout"
   resources :order_items, only: [:create, :update, :destroy]
+
+  namespace :admin do
+    resources :slides
+  end
 end

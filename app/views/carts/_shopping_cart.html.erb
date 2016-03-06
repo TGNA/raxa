@@ -33,7 +33,7 @@
       </ul> 
       <div class="clearfix"></div>
       <div class="clearfix"></div>
-      <a class="order" href="#">Place Order</a>
+      <%= link_to "Place Order", cart_checkout_path, class: "order", method: :post %>
     </div>
     <div class="col-md-9 cart-items">
       <h1>My Shopping Bag (<%= current_order.order_items.size %>)</h1>
