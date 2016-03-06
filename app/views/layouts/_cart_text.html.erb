@@ -1,0 +1,10 @@
+<div class="cart box_1">
+  <%= link_to cart_path do %>
+    <div class="total">
+      <span class="simpleCart_total"><%= number_to_currency current_order.subtotal %></span> (<span id="simpleCart_quantity" class="simpleCart_quantity"><%= current_order.order_items.size %></span>)
+    </div>
+    <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+  <% end %>
+  <div class="clearfix"> </div>
+</div>
+<div class="clearfix"> </div>

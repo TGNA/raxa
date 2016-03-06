@@ -1,0 +1,27 @@
+<div class="product-model">  
+  <div class="container">
+    <ol class="breadcrumb">
+      <li><a href="index.html">Home</a></li>
+      <li class="active">Products</li>
+    </ol>
+    <h2>Our Products</h2>     
+    <div class="col-md-9 product-model-sec">
+      <% @products.each do |product| %>
+        <%= render "product", product: product, order_item: @order_item %>
+      <% end %>
+    </div>
+    <div class="rsidebar span_1_of_left">
+      <section  class="sky-form">
+        <div class="product_right">
+          <h4 class="m_2">Categorias</h4>     
+          <div class="single-bottom">            
+            <a href="#"><p>Lanterns</p></a>
+            <a href="#"><p>Wall Lamps</p></a>
+            <a href="#"><p>Table Lamps</p></a>
+            <a href="#"><p>Selling Lamps</p></a>
+          </div>
+        </div>    
+      </section>     
+    </div>
+  </div>
+</div>
