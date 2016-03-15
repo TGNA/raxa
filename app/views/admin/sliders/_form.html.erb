@@ -1,0 +1,7 @@
+<%= form_for([:admin,@slide]) do |f| %>
+  <%= f.text_field :title %>
+  <%= f.text_field :description %>
+  <%= f.text_field :picture %>
+  <%= f.check_box :active %>
+  <%= f.submit "Submit" %>
+<% end %>

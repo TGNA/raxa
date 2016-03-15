@@ -62,12 +62,12 @@ ul.memenu.skyblue {text-align: center;}
 .skyblue>li:hover>a,.skyblue>li.active>a,.skyblue .dropdown li:hover>a{color:#00a0dc}
 .skyblue .mepanel img:hover,.skyblue form.contact input[type="text"]:focus,.skyblue form.contact textarea:focus{border:solid 1px #0194be}
 .skyblue form.contact input[type="submit"]{background:#0194be}
-@media (max-width: 991px){
-.memenu>li>a {
-    padding: 38px 26px;
+@media (max-width: 850px){
+  .memenu>li>a {
+    padding: 38px 15px;
+  }
 }
-}
-@media (max-width: 800px){
+/*@media (max-width: 800px){
 .memenu>li>a {
     padding: 38px 10px;
 }
@@ -201,4 +201,4 @@ left: 4.5%;
   font-size: 1em;
 }
 }
-	
+	*/

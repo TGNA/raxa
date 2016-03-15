@@ -1,20 +1,63 @@
 <div class="product-model">  
   <div class="container">
-    <h2>Our Products</h2>     
+    <h2>Nuestro productos</h2>  
+    <div class="text-center">
+      <%= page_entries_info @products %>  
+        <div class="btn-group btn-group-xs">
+          <%= link_to "Lista", products_path(mode: l, page: 2 ), class: "btn btn-default" %>
+          <%= link_to "Gràfico", products_path(mode: g, page: 4), class: "btn btn-default" %>
+        </div>
+    </div> 
     <div class="col-md-9 product-model-sec">
-      <% @products.each do |product| %>
-        <%= render "product", product: product, order_item: @order_item %>
+      <% if params[:mode] == 'g' %>
+        <% @products.each do |product| %>
+          <%= render "product", product: product, order_item: @order_item %>
+        <% end %>
+      <% else %>
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Código</th> 
+                <th>Descripción</th> 
+                <th>Precio</th> 
+                <th></th> 
+              </tr> 
+            </thead> 
+            <tbody>
+              <% @products.each do |product| %>
+                <tr> 
+                  <th scope="row"><%= product.ref_1 %></th> 
+                  <td><%= product.description %></td> 
+                  <td><%= number_to_currency product.price(current_user.tarifa) if user_signed_in? %></td> 
+                  <td>
+                    <% if user_signed_in? %>
+                      <%= form_for @order_item, remote: true do |f| %>
+                        <%= f.number_field :quantity, value: 1, class: "item_quantity", min: 1 %>
+                        <%= f.hidden_field :product_id, value: product.id %>
+                        <%= f.hidden_field :tarifa, value: current_user.tarifa %>
+                        <%= f.submit "AÑADIR", class: "item_add items" %>
+                      <% end %>
+                    <% end %>
+                  </td> 
+                </tr>
+              <% end %>
+            </tbody> 
+          </table>
+        </div>
       <% end %>
+      <%= paginate @products %>
     </div>
     <div class="rsidebar span_1_of_left">
       <section  class="sky-form">
         <div class="product_right">
           <h4 class="m_2">Categorias</h4>     
-          <div class="single-bottom">            
-            <a href="#"><p>Lanterns</p></a>
-            <a href="#"><p>Wall Lamps</p></a>
-            <a href="#"><p>Table Lamps</p></a>
-            <a href="#"><p>Selling Lamps</p></a>
+          <div class="single-bottom">
+            <% @categories.each do |c| %>     
+              <%= link_to products_path(category: c.s_id) do %>
+                <p><%= c.name %></p>
+              <% end %>
+            <% end %>
           </div>
         </div>    
       </section>     

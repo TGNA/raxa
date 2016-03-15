@@ -9,8 +9,6 @@ Rails.application.routes.draw do
 
   get '/about' => "welcome#about"
 
-  # get '/products' => "products#index"
-  # get '/products/:id' => "products#show"
   resources :products, only: [:index, :show]
   
   root 'welcome#index'
@@ -20,6 +18,10 @@ Rails.application.routes.draw do
   resources :order_items, only: [:create, :update, :destroy]
 
   namespace :admin do
-    resources :slides
+    root 'sliders#index'
+    resources :sliders, except: [:show]
+
+    get '/text' => "file_reader#text"
+    post '/text' => "file_reader#text_process"
   end
 end

@@ -1,31 +1,32 @@
-<%= link_to product_path(product) do %>
-  <div class="product-grid">
-  <div class="more-product"><span> </span></div>            
-  <div class="product-img b-link-stripe b-animate-go  thickbox">
-    <img src="images/p2.jpg" class="img-responsive" alt=""/>
-    <div class="b-wrapper">
-    <h4 class="b-animate b-from-left  b-delay03">             
-    <button><span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>Quick View</button>
-    </h4>
-    </div>
-  </div><% end %>
-  <div class="product-info simpleCart_shelfItem">
-    <div class="product-info-cust prt_name">
-      <h4><%= product.name %></h4>                
-      <span class="item_price"><%= number_to_currency product.price if user_signed_in? %></span> 
-      <div class="ofr">
-        <p class="pric1"><del>Rs 280</del></p>
-            <p class="disc">[12% Off]</p>
-      </div>
-      <% if user_signed_in? %>
-        <%= form_for order_item, remote: true do |f| %>
-          <%= f.number_field :quantity, value: 1, class: "item_quantity", min: 1 %>
-          <%= f.hidden_field :product_id, value: product.id %>
-          <%= f.submit "ADD", class: "item_add items" %>
-        <% end %>
-      <% end %>
-      <div class="clearfix"> </div>
-    </div>            
-  </div>
-</div>
 
+  <div class="product-grid">
+    <%= link_to product_path(product) do %>
+      <div class="product-img b-link-stripe b-animate-go  thickbox">
+        <img class="lazy img-responsive" data-src="http://raxadistribuciones.com/upload/jpg/<%= product.foto %>" />
+        <div class="b-wrapper">
+        <h4 class="b-animate b-from-left  b-delay03">             
+        <button><span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>Vista rápida</button>
+        </h4>
+        </div>
+      </div>
+    <% end %>
+    <div class="product-info simpleCart_shelfItem">
+      <div class="product-info-cust prt_name">
+        <h4><%= product.description %></h4>                
+        <span class="item_price"><%= number_to_currency product.price(current_user.tarifa) if user_signed_in? %></span> 
+        <div class="ofr">
+          <!-- <p class="pric1"><del>Rs 280</del></p> -->
+              <p class="disc"><%= "#{product.descuento}%" if user_signed_in? && !product.descuento.zero? %></p>
+        </div>
+        <% if user_signed_in? %>
+          <%= form_for order_item, remote: true do |f| %>
+            <%= f.number_field :quantity, value: 1, class: "item_quantity", min: 1 %>
+            <%= f.hidden_field :product_id, value: product.id %>
+            <%= f.hidden_field :tarifa, value: current_user.tarifa %>
+            <%= f.submit "AÑADIR", class: "item_add items" %>
+          <% end %>
+        <% end %>
+        <div class="clearfix"> </div>
+      </div>            
+    </div>
+  </div>

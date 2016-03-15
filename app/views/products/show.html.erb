@@ -5,23 +5,17 @@
           <div class="col-md-7 single-top"> 
            <div class="flexslider">
                 <ul class="slides">
-                <li data-thumb="http://localhost:3000/images/si.jpg">
-                  <div class="thumb-image"> <img src="http://localhost:3000/images/si.jpg" data-imagezoom="true" class="img-responsive" alt=""/> </div>
-                </li>
-                <li data-thumb="http://localhost:3000/images/si2.jpg">
-                   <div class="thumb-image"> <img src="http://localhost:3000/images/si2.jpg" data-imagezoom="true" class="img-responsive" alt=""/> </div>
-                </li>
-                <li data-thumb="http://localhost:3000/images/si3.jpg">
-                   <div class="thumb-image"> <img src="http://localhost:3000/images/si3.jpg" data-imagezoom="true" class="img-responsive" alt=""/> </div>
-                </li> 
+                  <li data-thumb="http://raxadistribuciones.com/upload/jpg/<%= @product.foto %>">
+                    <div class="thumb-image"> <img src="http://raxadistribuciones.com/upload/jpg/<%= @product.foto %>" data-imagezoom="true" class="img-responsive" alt=""/> </div>
+                  </li>
                 </ul>
             </div>
          </div> 
            <div class="col-md-5 single-top-in simpleCart_shelfItem">
             <div class="single-para ">
-             <h4><%= @product.name %></h4>              
+             <h4><%= @product.description %></h4>              
               <% if user_signed_in? %>
-                <h5 class="item_price"><%= number_to_currency @product.price%></h5>  
+                <h5 class="item_price"><%= number_to_currency @product.price(current_user) %></h5>  
               <% end %>            
               <p class="para">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, Vivamus porttitor tincidunt elementum nisi a, euismod rhoncus urna. Curabitur scelerisque vulputate diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat </p>
               <div class="prdt-info-grid">
@@ -47,3 +41,9 @@
    </div>
 </div>
 <script type="text/javascript" src="<%=root_url%>/assets/jquery.flexslider.js"></script>
+<script type="text/javascript">
+  $('.flexslider').flexslider({
+    animation: "slide",
+    controlNav: "thumbnails"
+  });
+</script>

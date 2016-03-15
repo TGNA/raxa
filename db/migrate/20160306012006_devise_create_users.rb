@@ -31,7 +31,12 @@ class DeviseCreateUsers < ActiveRecord::Migration
       # t.datetime :locked_at
 
 
-      t.timestamps null: false
+      t.integer :codigo_cliente
+      t.string :nif
+      t.boolean :cliento_con_recargo
+      t.integer :tarifa
+      t.string :cd_ruta
+      t.string :email_vendedor
     end
 
     add_index :users, :email,                unique: true

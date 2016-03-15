@@ -6,6 +6,7 @@ class CreateOrderItems < ActiveRecord::Migration
       t.decimal :unit_price, precision: 12, scale: 3
       t.integer :quantity
       t.decimal :total_price, precision: 12, scale: 3
+      t.integer :tarifa
 
       t.timestamps null: false
     end

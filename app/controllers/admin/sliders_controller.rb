@@ -1,6 +1,7 @@
-class Admin::SlidesController < ApplicationController
+class Admin::SlidersController < ApplicationController
+  layout "admin"
   before_action :authenticate_admin!
-  before_action :set_scan, only: [:show, :destroy, :update]
+  before_action :set_slide, only: [:edit, :destroy, :update]
 
   def index
     @slides = Slider.unscoped.all    
@@ -13,18 +14,15 @@ class Admin::SlidesController < ApplicationController
   def create
     @slide = Slider.new(slide_params)
     if @slide.save
-      redirect_to admin_slides_path
+      redirect_to admin_sliders_path
     else
       render 'new'
     end 
   end
 
-  def show
-  end
-
   def destroy 
     @slide.destroy
-    redirect_to admin_slides_path, flash: { success: "Slide eliminada" }
+    redirect_to admin_sliders_path, flash: { success: "Slide eliminada" }
   end
 
   def edit
@@ -32,9 +30,9 @@ class Admin::SlidesController < ApplicationController
   end
 
   def update
-    @taggable.update_attributes slide_params
-    if @taggable.save
-      redirect_to taggable_path(@taggable), :flash => { :success => t(".taggable_update") }
+    @slide.update_attributes slide_params
+    if @slide.save
+      redirect_to admin_sliders_path, :flash => { :success => "Slide actualizada" }
     else
       render 'edit'
     end 
@@ -42,7 +40,7 @@ class Admin::SlidesController < ApplicationController
   
   private
   def slide_params
-    params.require(:slide).permit(:active, :description, :picture, :title)
+    params.require(:slider).permit(:active, :description, :picture, :title)
   end
 
   def set_slide

@@ -3,7 +3,7 @@
        <ul class="rslides" id="slider">
        <% @slides.each do |s| %>
            <li>
-         <div class="banner1">          
+         <div class="banner" style="background:url(<%= s.picture %>) no-repeat 0px 0px;">          
             <div class="banner-info">
             <h3><%= s.title %></h3>
             <p><%= s.description %></p>
