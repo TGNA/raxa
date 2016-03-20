@@ -15,21 +15,22 @@
             <div class="single-para ">
              <h4><%= @product.description %></h4>              
               <% if user_signed_in? %>
-                <h5 class="item_price"><%= number_to_currency @product.price(current_user) %></h5>  
+                <h5 class="item_price"><%= number_to_currency @product.price(current_user.tarifa) %></h5>  
               <% end %>            
-              <p class="para">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, Vivamus porttitor tincidunt elementum nisi a, euismod rhoncus urna. Curabitur scelerisque vulputate diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat </p>
+              <p class="para"><%= raw @product.description %></p>
               <div class="prdt-info-grid">
                  <ul>
-                   <li>- Brand : Fos Lighting</li>
-                   <li>- Dimensions : (LXBXH) in cms of...</li>
-                   <li>- Color : Brown</li>
-                   <li>- Material : Wood</li>
+                   <li>- EAN : <%= @product.ean %></li>
+                   <li>- Unidades por caja : <%= @product.unidad_caja %></li>
+                   <li>- Referencia : <%= @product.ref_1 %></li>
+                   <li>- Descuento : <%= @product.descuento %>%</li>
                  </ul>
               </div>
               <% if user_signed_in? %>
                 <%= form_for @order_item, remote: true do |f| %>
                   <%= f.number_field :quantity, value: 1, class: "item_quantity", min: 1 %>
                   <%= f.hidden_field :product_id, value: @product.id %>
+                  <%= f.hidden_field :tarifa, value: current_user.tarifa %>
                   <%= f.submit "ADD", class: "item_add items" %>
                 <% end %>
               <% end %>          

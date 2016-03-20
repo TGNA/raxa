@@ -1,4 +1,4 @@
 <%= form_tag admin_text_url do %>
-  <%= text_area_tag(:text) %>
-  <%= submit_tag("Procesar") %>
+  <%= submit_tag("Procesar", class: "btn btn-success pull-right") %>
+  <%= text_area_tag(:text, nil, class: "form-control") %>
 <% end %>

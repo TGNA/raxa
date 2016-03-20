@@ -12,30 +12,30 @@ class OrderItem < ActiveRecord::Base
     if persisted?
       self[:unit_price]
     else
-      product.price(self.tarifa)
+      product.price(self.tarifa)*(1-(product.descuento.to_f/100))
     end
   end
 
-  # def total_price
-  #   unit_price * quantity
-  # end
+  def total_price
+    unit_price * quantity
+  end
 
   private
   def product_present
     if product.nil?
-      errors.add(:product, "is not valid or is not active.")
+      errors.add(:product, "es no valido o no esta activo.")
     end
   end
 
   def order_present
     if order.nil?
-      errors.add(:order, "is not a valid order.")
+      errors.add(:order, "pedido no valido.")
     end
   end
 
   def finalize
     self[:unit_price] = unit_price
     total = quantity * self[:unit_price]
-    self[:total_price] = total*(1-(product.descuento/100))
+    self[:total_price] = total
   end
 end

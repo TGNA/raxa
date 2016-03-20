@@ -1,7 +1,21 @@
 <%= form_for([:admin,@slide]) do |f| %>
-  <%= f.text_field :title %>
-  <%= f.text_field :description %>
-  <%= f.text_field :picture %>
-  <%= f.check_box :active %>
-  <%= f.submit "Submit" %>
+  <div class="form-group">
+    <label>Titulo</label>
+    <%= f.text_field :title, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <label>Descripcion</label>
+    <%= f.text_field :description, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <label>Imagen</label>
+    <%= f.text_field :picture, class: "form-control" %>
+  </div>
+  <div class="checkbox">
+    <label>
+      <%= f.check_box :active %> Activo
+    </label>
+  </div>
+  <%= f.submit "Subir", class: "btn btn-success" %>
 <% end %>
+
