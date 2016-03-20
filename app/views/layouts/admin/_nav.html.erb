@@ -11,14 +11,12 @@
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
       <ul class="nav navbar-nav">
-        <%= nav_link "Users", root_path %>
-        <%= nav_link "Taggables", root_path %>
-        <%= nav_link "Tags", root_path %>
-        <%= nav_link "Scans", root_path %>
+        <%= nav_link "Sliders", admin_sliders_path %>
+        <%= nav_link "Text", admin_text_path %>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="active">
-          <%= link_to "Sign out", destroy_admin_session_path, method: 'delete' %>
+          <%= link_to "Salir", destroy_admin_session_path, method: 'delete' %>
         </li>
       </ul>
       <p class="navbar-text navbar-right"><%= current_admin.email %></p>

@@ -4,6 +4,7 @@ class OrderNotifier < ApplicationMailer
   def send_cart_email(order)
     @order = order
     @order_items = @order.order_items
-    mail(to: ["oscarbc1996@gmail.com"], subject: 'Nueva compra realizada' )
+    @user = @order.user
+    mail(to: [@order.email, @order.email_vendedor, "contacto@raxadistribuciones.com"], subject: 'Nueva compra realizada' )
   end
 end

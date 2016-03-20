@@ -5,9 +5,9 @@
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         <h5>Email</h5> 
         <%= f.email_field :email, autofocus: true %>
-        <h5>Password</h5>
+        <h5>Contraseña</h5>
          <%= f.password_field :password, autocomplete: "off" %>
-         <%= f.submit "Log in" %>
+         <%= f.submit "Entrar" %>
       <% end %>
       <%= render "admins/shared/links" %>
     </div>

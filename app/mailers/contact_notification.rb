@@ -3,6 +3,6 @@ class ContactNotification < ApplicationMailer
 
   def send_contact_email(contact)
     @contact = contact
-    mail(to: ["oscarbc1996@gmail.com"], subject: 'Nuevo formulario de contacto lleno' )
+    mail(to: [contact.email, "contacto@raxadistribuciones.com"], subject: 'Nuevo formulario de contacto lleno' )
   end
 end

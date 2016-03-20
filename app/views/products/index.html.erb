@@ -1,15 +1,14 @@
 <div class="product-model">  
   <div class="container">
     <h2>Nuestro productos</h2>  
-    <div class="text-center">
-      <%= page_entries_info @products %>  
-        <div class="btn-group btn-group-xs">
-          <%= link_to "Lista", products_path(mode: l, page: 2 ), class: "btn btn-default" %>
-          <%= link_to "Gràfico", products_path(mode: g, page: 4), class: "btn btn-default" %>
-        </div>
+    <div class="text-center view-selector">
+      <div class="btn-group btn-group-xs">
+        <%= link_to "Lista", products_path(mode: "l", page: params[:page]), class: "btn btn-default" %>
+        <%= link_to "Gràfico", products_path(mode: "g", page: params[:page]), class: "btn btn-default" %>
+      </div>
     </div> 
     <div class="col-md-9 product-model-sec">
-      <% if params[:mode] == 'g' %>
+      <% unless params[:mode] == 'l' %>
         <% @products.each do |product| %>
           <%= render "product", product: product, order_item: @order_item %>
         <% end %>
@@ -20,18 +19,22 @@
               <tr>
                 <th>Código</th> 
                 <th>Descripción</th> 
-                <th>Precio</th> 
-                <th></th> 
+                <% if user_signed_in?%>
+                  <th>Precio</th> 
+                  <th></th>
+                <% end %> 
               </tr> 
             </thead> 
             <tbody>
               <% @products.each do |product| %>
                 <tr> 
-                  <th scope="row"><%= product.ref_1 %></th> 
+                  <th scope="row">
+                  <%= link_to product.ref_1, product_path(product) %>
+                  </th> 
                   <td><%= product.description %></td> 
-                  <td><%= number_to_currency product.price(current_user.tarifa) if user_signed_in? %></td> 
-                  <td>
-                    <% if user_signed_in? %>
+                  <% if user_signed_in?%>
+                    <td><%= number_to_currency product.price(current_user.tarifa) %></td> 
+                    <td>
                       <%= form_for @order_item, remote: true do |f| %>
                         <%= f.number_field :quantity, value: 1, class: "item_quantity", min: 1 %>
                         <%= f.hidden_field :product_id, value: product.id %>

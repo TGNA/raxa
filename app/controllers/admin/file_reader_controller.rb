@@ -6,9 +6,9 @@ class Admin::FileReaderController < ApplicationController
   end
 
   def text_process
-    Product.destroy_all
-    ProductCategory.destroy_all
-    User.destroy_all
+    Product.delete_all
+    ProductCategory.delete_all
+    User.delete_all
     params[:text].split("\n").each do |line|
       type = line.split("#")[0]
       if type=="FAMILIAS"

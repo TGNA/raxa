@@ -5,8 +5,12 @@ class CartsController < ApplicationController
   end
 
   def checkout
-    current_order.checkout
-    session[:order_id] = nil
-    redirect_to root_path, flash: { success: "Compra realizada perfectamente" }
+    if current_order.subtotal >= 450
+      current_order.checkout
+      session[:order_id] = nil
+      redirect_to root_path, flash: { success: "Compra realizada perfectamente" }
+    else
+      redirect_to root_path, flash: { error: "Pedido minimo 450€" }
+    end
   end
 end

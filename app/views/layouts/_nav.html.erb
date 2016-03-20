@@ -6,14 +6,14 @@
        <!---->     
        <div class="top-nav">
         <ul class="memenu skyblue">
-          <%= nav_link "Catalogo", products_path %>
+          <%= nav_link "Catálogo", products_path %>
           <%= nav_link "Empresa", about_path %> 
           <%= nav_link "Contacto", contact_path %>     
         </ul>       
        </div>
        <!---->
           <% if user_signed_in? %>
-            <%= link_to('Logout', destroy_user_session_path, method: :delete, class: "cart box_1") %> 
+            <%= link_to('Desconectar', destroy_user_session_path, method: :delete, class: "cart box_1") %> 
             <div class="cart-text">
               <%= render 'layouts/cart_text' %> 
             </div> 
@@ -21,7 +21,7 @@
             <div class="pull-right">
               <ul class="memenu skyblue">
                 <li class="grid">  
-                  <%= link_to "Sign in", new_user_session_path %>
+                  <%= link_to "Entrar", new_user_session_path %>
                 </li>       
               </ul>
             </div>

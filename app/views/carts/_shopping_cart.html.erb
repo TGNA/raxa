@@ -16,27 +16,27 @@
 <% else %>
   <div class="check-sec">  
     <div class="col-md-3 cart-total">
-      <%= link_to "Continue to basket", products_path, class: "continue" %>
+      <%= link_to "Continuar comprando", products_path, class: "continue" %>
       <div class="price-details">
-        <h3>Price Details</h3>
-        <span>Total</span>
-        <span class="total1">6200.00</span>
-        <span>Discount</span>
-        <span class="total1">10%(Festival Offer)</span>
-        <span>Delivery Charges</span>
-        <span class="total1">150.00</span>
+        <h3>Detalles del precio</h3>
+        <span>Subtotal</span>
+        <span class="total1"><%= number_to_currency current_order.subtotal %></span>
+        <span>Impuestos</span>
+        <span class="total1"><%= number_to_currency current_order.tax %></span>
+        <span>Recargo</span>
+        <span class="total1"><%= number_to_currency current_order.recargo %></span>
         <div class="clearfix"></div>         
       </div>  
       <ul class="total_price">
          <li class="last_price"> <h4>TOTAL</h4></li>  
-         <li class="last_price"><span><%= current_order.subtotal %></span></li>        
+         <li class="last_price"><span><%= number_to_currency current_order.total %></span></li>        
       </ul> 
       <div class="clearfix"></div>
       <div class="clearfix"></div>
-      <%= link_to "Place Order", cart_checkout_path, class: "order", method: :post %>
+      <%= link_to "Comprar", cart_checkout_path, class: "order", method: :post %>
     </div>
     <div class="col-md-9 cart-items">
-      <h1>My Shopping Bag (<%= current_order.order_items.size %>)</h1>
+      <h1>Mi bolsa de la compra(<%= current_order.order_items.size %>)</h1>
       <% @order_items.each do |order_item| %>
         <%= render 'carts/cart_row', product: order_item.product, order_item: order_item, show_total: true %>
       <% end %>
