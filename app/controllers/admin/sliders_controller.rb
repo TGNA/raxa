@@ -40,7 +40,7 @@ class Admin::SlidersController < ApplicationController
   
   private
   def slide_params
-    params.require(:slider).permit(:active, :description, :picture, :title)
+    params.require(:slider).permit(:active, :description, :picture, :color, :title)
   end
 
   def set_slide

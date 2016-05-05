@@ -1,8 +1,6 @@
 class Order < ActiveRecord::Base
-  belongs_to :order_status
   belongs_to :user
   has_many :order_items
-  before_create :set_order_status
   before_save :update_info
 
   def subtotal
@@ -22,14 +20,9 @@ class Order < ActiveRecord::Base
   end
 
   def checkout
-    self.order_status_id = 2
-    self.save
     OrderNotifier.send_cart_email(self).deliver_now
   end
   private
-  def set_order_status
-    self.order_status_id = 1
-  end
 
   def update_info
     self[:subtotal] = subtotal

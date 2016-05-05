@@ -2,10 +2,19 @@
   <div class="container">
     <h2>Nuestro productos</h2>  
     <div class="text-center view-selector">
-      <div class="btn-group btn-group-xs">
-        <%= link_to "Lista", products_path(mode: "l", page: params[:page]), class: "btn btn-default" %>
-        <%= link_to "Gràfico", products_path(mode: "g", page: params[:page]), class: "btn btn-default" %>
+      <div class="btn-group btn-group">
+        
       </div>
+      <%= form_tag(products_path, :method => "get", class: "form-inline") do %>
+        
+        <div class="input-group">
+          <%= link_to "Lista", products_path(request.query_parameters.merge({mode: "l"})), class: "btn btn-default input-group-addon" %>
+          <%= link_to "Gràfico", products_path(request.query_parameters.merge({mode: "g"})), class: "btn btn-default input-group-addon" %>
+          <%= text_field_tag :search, params[:search], placeholder: "Buscar", class: "form-control" %>
+        </div>
+
+        <%= submit_tag "Buscar", class: "btn btn-success" %>
+      <% end %>
     </div> 
     <div class="col-md-9 product-model-sec">
       <% unless params[:mode] == 'l' %>
@@ -17,7 +26,6 @@
           <table class="table table-striped">
             <thead>
               <tr>
-                <th>Código</th> 
                 <th>Descripción</th> 
                 <% if user_signed_in?%>
                   <th>Precio</th> 
@@ -28,10 +36,7 @@
             <tbody>
               <% @products.each do |product| %>
                 <tr> 
-                  <th scope="row">
-                  <%= link_to product.ref_1, product_path(product) %>
-                  </th> 
-                  <td><%= product.description %></td> 
+                  <td><%= link_to product.description, product_path(product) %></td> 
                   <% if user_signed_in?%>
                     <td><%= number_to_currency product.price(current_user.tarifa) %></td> 
                     <td>
@@ -54,7 +59,7 @@
     <div class="rsidebar span_1_of_left">
       <section  class="sky-form">
         <div class="product_right">
-          <h4 class="m_2">Categorias</h4>     
+          <h4 class="m_2">Familias</h4>     
           <div class="single-bottom">
             <% @categories.each do |c| %>     
               <%= link_to products_path(category: c.s_id) do %>

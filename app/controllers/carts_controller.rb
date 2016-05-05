@@ -10,7 +10,7 @@ class CartsController < ApplicationController
       session[:order_id] = nil
       redirect_to root_path, flash: { success: "Compra realizada perfectamente" }
     else
-      redirect_to root_path, flash: { error: "Pedido minimo 450€" }
+      redirect_to cart_path, flash: { error: "Pedido minimo 450€" }
     end
   end
 end

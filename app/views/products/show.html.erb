@@ -6,7 +6,9 @@
            <div class="flexslider">
                 <ul class="slides">
                   <li data-thumb="http://raxadistribuciones.com/upload/jpg/<%= @product.foto %>">
-                    <div class="thumb-image"> <img src="http://raxadistribuciones.com/upload/jpg/<%= @product.foto %>" data-imagezoom="true" class="img-responsive" alt=""/> </div>
+                    <div class="thumb-image"> 
+                      <img data-src="http://raxadistribuciones.com/upload/jpg/<%= @product.foto %>" data-imagezoom="true" class="lazy img-responsive"> 
+                    </div>
                   </li>
                 </ul>
             </div>
@@ -15,7 +17,11 @@
             <div class="single-para ">
              <h4><%= @product.description %></h4>              
               <% if user_signed_in? %>
-                <h5 class="item_price"><%= number_to_currency @product.price(current_user.tarifa) %></h5>  
+                <h5 class="item_price"><%= number_to_currency @product.price(current_user.tarifa) %></h5> 
+              <% else %>
+                <div class="well">
+                  No puede comprar, ni ver el preco si no ha iniciado sesión.
+                </div> 
               <% end %>            
               <p class="para"><%= raw @product.description %></p>
               <div class="prdt-info-grid">
@@ -31,7 +37,7 @@
                   <%= f.number_field :quantity, value: 1, class: "item_quantity", min: 1 %>
                   <%= f.hidden_field :product_id, value: @product.id %>
                   <%= f.hidden_field :tarifa, value: current_user.tarifa %>
-                  <%= f.submit "ADD", class: "item_add items" %>
+                  <%= f.submit "AÑADIR", class: "item_add items" %>
                 <% end %>
               <% end %>          
            </div>

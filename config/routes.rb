@@ -7,9 +7,12 @@ Rails.application.routes.draw do
   get '/contact' => "contact#new"
   post '/contact' => "contact#create"
 
+  post '/client' => "contact#create_client"
+
   get '/about' => "welcome#about"
 
   resources :products, only: [:index, :show]
+  get '/familias' => "products#familias"
   
   root 'welcome#index'
 

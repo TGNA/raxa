@@ -1,13 +1,65 @@
 <div class="login_sec">
   <div class="container">
-    <h2>Login</h2>
-    <div class="col-md-6 log">      
+    <div class="col-md-6 log">
+      <h2>Login</h2>      
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         <h5>Email</h5> 
         <%= f.email_field :email, autofocus: true %>
         <h5>Contraseña</h5>
          <%= f.password_field :password, autocomplete: "off" %>
          <%= f.submit "Entrar" %>
+      <% end %>
+    </div>
+    <div class="col-md-6 log">
+      <h2>Nuevo cliente</h2>
+      <%= form_for NewClient.new, url: client_path do |f| %>
+        <%= f.hidden_field :subject, value: "-" %>
+        <div>
+          <span><label>NOMBRE</label></span>
+          <span><%= f.text_field :name %></span>
+          <% unless f.object.errors[:name].empty? %>
+            <span class="label label-warning">
+              <%= f.object.errors[:name].join(", ") %>
+            </span>
+          <% end %>
+        </div>
+        <div>
+          <span><label>E-MAIL</label></span>
+          <span><%= f.email_field :email %></span>
+          <% unless f.object.errors[:email].empty? %>
+            <span class="label label-warning">
+              <%= f.object.errors[:email].join(", ") %>
+            </span>
+          <% end %>
+        </div>
+        <div>
+          <span><label>DNI/NIF</label></span>
+          <span><%= f.text_field :dni %></span>
+          <% unless f.object.errors[:dni].empty? %>
+            <span class="label label-warning">
+              <%= f.object.errors[:dni].join(", ") %>
+            </span>
+          <% end %>
+        </div>
+        <div>
+          <span><label>TELÉFONO</label></span>
+          <span><%= f.telephone_field :mobile %></span>
+          <% unless f.object.errors[:mobile].empty? %>
+            <span class="label label-warning">
+              <%= f.object.errors[:mobile].join(", ") %>
+            </span>
+          <% end %>
+        </div>
+        <div>
+          <span><label>EMPRESA</label></span>
+          <span><%= f.text_field :company %></span>
+          <% unless f.object.errors[:company].empty? %>
+            <span class="label label-warning">
+              <%= f.object.errors[:company].join(", ") %>
+            </span>
+          <% end %>
+        </div>
+        <span><%= f.submit "ENVIAR" %></span>
       <% end %>
     </div>
     <%= render "users/shared/links" %>

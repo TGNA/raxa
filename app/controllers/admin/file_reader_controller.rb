@@ -12,11 +12,26 @@ class Admin::FileReaderController < ApplicationController
     params[:text].split("\n").each do |line|
       type = line.split("#")[0]
       if type=="FAMILIAS"
-        process_category(line)
+        begin
+          process_category(line)
+        rescue
+          redirect_to admin_text_url, :flash => { :error => "Error en el formato del archivo." }
+          return
+        end
       elsif type=="ARTICULOS"
-        process_product(line)
+        begin
+          process_product(line)
+        rescue
+          redirect_to admin_text_url, :flash => { :error => "Error en el formato del archivo." }
+          return
+        end
       elsif  type=="CLIENTES"
-        process_user(line)
+        begin
+          process_user(line)
+        rescue
+          redirect_to admin_text_url, :flash => { :error => "Error en el formato del archivo." }
+          return
+        end
       end
     end
     redirect_to admin_text_url
